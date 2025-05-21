@@ -30,9 +30,7 @@ jobs:
           flutter pub publish --dry-run
 
       - name: Authenticate with pub.dev
-        run: dart pub token add https://pub.dev --env-var PUB_DEV_TOKEN_ENV_VAR
-        env:
-          PUB_DEV_TOKEN_ENV_VAR: ${{ secrets.PUB_DEV_TOKEN }}
+        run: dart pub token add https://pub.dev --env-var ${{ secrets.PUB_DEV_TOKEN }}
 
       - name: Publish package to pub.dev
         run: flutter pub publish --force
