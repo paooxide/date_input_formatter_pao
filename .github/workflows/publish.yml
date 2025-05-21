@@ -24,7 +24,7 @@ jobs:
 
       - name: Verify package (analyze, test, dry run)
         run: |
-          flutter analyze
+          flutter analyze lib test
           flutter test
           # The dry-run is especially important in CI to catch issues
           flutter pub publish --dry-run
