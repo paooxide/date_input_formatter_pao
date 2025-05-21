@@ -1,0 +1,43 @@
+name: Publish to pub.dev
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+*'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify tag is on main branch
+        run: |
+          # Check if the tag is an ancestor of the main branch
+          # If not, this command will exit with a non-zero status, failing the workflow
+          git merge-base --is-ancestor $GITHUB_REF_NAME main
+          echo "Tag $GITHUB_REF_NAME is on the main branch."
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Verify package (analyze, test, dry run)
+        run: |
+          flutter analyze
+          flutter test
+          # The dry-run is especially important in CI to catch issues
+          flutter pub publish --dry-run
+
+      - name: Authenticate with pub.dev
+        run: echo '${{ secrets.PUB_DEV_TOKEN }}' | dart pub token add https://pub.dev --stdin
+
+      - name: Publish package to pub.dev
+        run: flutter pub publish --force

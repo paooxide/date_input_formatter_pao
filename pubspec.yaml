@@ -1,0 +1,27 @@
+name: date_input_formatter_pao
+description: "A Dart package that provides a custom TextInputFormatter for formatting and validating date input in Flutter applications. It allows users to enter dates in a specific format (e.g., 'dd/MM/yyyy') and ensures that the input is valid according to the specified format. The package also includes options for customizing the date format and handling invalid input gracefully."
+version: 0.1.0
+homepage: "https://github.com/paooxide/date_input_formatter_pao"
+repository: https://github.com/paooxide/date_input_formatter_pao
+issue_tracker: https://github.com/paooxide/date_input_formatter_pao/issues
+topics:
+  - flutter
+  - date
+  - input
+  - formatter
+  - text-input
+
+environment:
+  sdk: ^3.8.0
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
