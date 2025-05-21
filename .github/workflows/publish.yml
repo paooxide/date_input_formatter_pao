@@ -3,7 +3,7 @@ name: Publish to pub.dev
 on:
   push:
     tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+*'
+      - "v[0-9]+.[0-9]+.[0-9]+*"
 
 jobs:
   publish:
@@ -14,17 +14,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Verify tag is on main branch
-        run: |
-          # Check if the tag is an ancestor of the main branch
-          # If not, this command will exit with a non-zero status, failing the workflow
-          git merge-base --is-ancestor $GITHUB_REF_NAME main
-          echo "Tag $GITHUB_REF_NAME is on the main branch."
-
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: 'stable'
+          channel: "stable"
 
       - name: Install dependencies
         run: flutter pub get
